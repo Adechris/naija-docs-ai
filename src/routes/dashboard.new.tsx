@@ -27,9 +27,8 @@ const description =
   "Pick from 20 Nigerian-context document types, fill a short form, and generate a professional document in seconds.";
 
 export const Route = createFileRoute("/dashboard/new")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    type: typeof search.type === "string" ? search.type : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { type?: string } =>
+    typeof search["type"] === "string" ? { type: search["type"] } : {},
   head: () => ({
     meta: [
       { title },
