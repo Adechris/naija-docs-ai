@@ -14,6 +14,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardBillingRouteImport } from './routes/dashboard.billing'
 import { Route as DashboardDocumentsRouteImport } from './routes/dashboard.documents'
 import { Route as DashboardEditorRouteImport } from './routes/dashboard.editor'
 import { Route as DashboardFavouritesRouteImport } from './routes/dashboard.favourites'
@@ -43,6 +44,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBillingRoute = DashboardBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardDocumentsRoute = DashboardDocumentsRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/dashboard/billing': typeof DashboardBillingRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/editor': typeof DashboardEditorRoute
   '/dashboard/favourites': typeof DashboardFavouritesRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/dashboard/billing': typeof DashboardBillingRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/editor': typeof DashboardEditorRoute
   '/dashboard/favourites': typeof DashboardFavouritesRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/dashboard/billing': typeof DashboardBillingRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/editor': typeof DashboardEditorRoute
   '/dashboard/favourites': typeof DashboardFavouritesRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/register'
+    | '/dashboard/billing'
     | '/dashboard/documents'
     | '/dashboard/editor'
     | '/dashboard/favourites'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/register'
+    | '/dashboard/billing'
     | '/dashboard/documents'
     | '/dashboard/editor'
     | '/dashboard/favourites'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/register'
+    | '/dashboard/billing'
     | '/dashboard/documents'
     | '/dashboard/editor'
     | '/dashboard/favourites'
@@ -189,6 +201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/billing': {
+      id: '/dashboard/billing'
+      path: '/billing'
+      fullPath: '/dashboard/billing'
+      preLoaderRoute: typeof DashboardBillingRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/documents': {
       id: '/dashboard/documents'
       path: '/documents'
@@ -228,6 +247,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteChildren {
+  DashboardBillingRoute: typeof DashboardBillingRoute
   DashboardDocumentsRoute: typeof DashboardDocumentsRoute
   DashboardEditorRoute: typeof DashboardEditorRoute
   DashboardFavouritesRoute: typeof DashboardFavouritesRoute
@@ -237,6 +257,7 @@ interface DashboardRouteChildren {
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardBillingRoute: DashboardBillingRoute,
   DashboardDocumentsRoute: DashboardDocumentsRoute,
   DashboardEditorRoute: DashboardEditorRoute,
   DashboardFavouritesRoute: DashboardFavouritesRoute,
