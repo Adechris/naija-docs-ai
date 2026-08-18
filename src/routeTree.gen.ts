@@ -16,6 +16,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as DashboardDocumentsRouteImport } from './routes/dashboard.documents'
 import { Route as DashboardEditorRouteImport } from './routes/dashboard.editor'
+import { Route as DashboardFavouritesRouteImport } from './routes/dashboard.favourites'
 import { Route as DashboardNewRouteImport } from './routes/dashboard.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const DashboardEditorRoute = DashboardEditorRouteImport.update({
   path: '/editor',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardFavouritesRoute = DashboardFavouritesRouteImport.update({
+  id: '/favourites',
+  path: '/favourites',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardNewRoute = DashboardNewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/editor': typeof DashboardEditorRoute
+  '/dashboard/favourites': typeof DashboardFavouritesRoute
   '/dashboard/new': typeof DashboardNewRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/editor': typeof DashboardEditorRoute
+  '/dashboard/favourites': typeof DashboardFavouritesRoute
   '/dashboard/new': typeof DashboardNewRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/editor': typeof DashboardEditorRoute
+  '/dashboard/favourites': typeof DashboardFavouritesRoute
   '/dashboard/new': typeof DashboardNewRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/documents'
     | '/dashboard/editor'
+    | '/dashboard/favourites'
     | '/dashboard/new'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/documents'
     | '/dashboard/editor'
+    | '/dashboard/favourites'
     | '/dashboard/new'
     | '/dashboard'
   id:
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/documents'
     | '/dashboard/editor'
+    | '/dashboard/favourites'
     | '/dashboard/new'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -179,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardEditorRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/favourites': {
+      id: '/dashboard/favourites'
+      path: '/favourites'
+      fullPath: '/dashboard/favourites'
+      preLoaderRoute: typeof DashboardFavouritesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/new': {
       id: '/dashboard/new'
       path: '/new'
@@ -192,6 +211,7 @@ declare module '@tanstack/react-router' {
 interface DashboardRouteChildren {
   DashboardDocumentsRoute: typeof DashboardDocumentsRoute
   DashboardEditorRoute: typeof DashboardEditorRoute
+  DashboardFavouritesRoute: typeof DashboardFavouritesRoute
   DashboardNewRoute: typeof DashboardNewRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
@@ -199,6 +219,7 @@ interface DashboardRouteChildren {
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardDocumentsRoute: DashboardDocumentsRoute,
   DashboardEditorRoute: DashboardEditorRoute,
+  DashboardFavouritesRoute: DashboardFavouritesRoute,
   DashboardNewRoute: DashboardNewRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
