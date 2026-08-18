@@ -245,7 +245,11 @@ export function LiveDemo() {
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const excerpt = SAMPLE_DOCUMENT.slice(0, 720);
 
-  useEffect(() => () => timer.current && clearInterval(timer.current), []);
+  useEffect(() => {
+    return () => {
+      if (timer.current) clearInterval(timer.current);
+    };
+  }, []);
 
   const run = () => {
     if (timer.current) clearInterval(timer.current);
@@ -500,7 +504,7 @@ export function Pricing() {
 }
 
 export function FAQ() {
-  const faqs = [
+  const faqs: [string, string][] = [
     [
       "Is DocuAI legally binding?",
       "DocuAI generates professionally drafted documents grounded in Nigerian statutes. Once signed by the parties, they carry the same weight as any other written agreement. For high-value or contentious matters we still recommend a review by your legal counsel.",
